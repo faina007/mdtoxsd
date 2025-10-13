@@ -1,6 +1,5 @@
-<!--Documentatie-->
-<!--20230109 ONDERWERP: aanpassing schema. WAT: maxOccurs bij attribuut archiefvormer aangepast naar 'unbounded', minOccurs bij attribuut beperkingGebruik aangepast naar '1'. Beiden nu conform metagegevensschema MDTO. Versie XML schema aangepast naar 1.0.1.-->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="https://www.nationaalarchief.nl/mdto" targetNamespace="https://www.nationaalarchief.nl/mdto" elementFormDefault="qualified" attributeFormDefault="unqualified" version="v1.0.1">
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="https://www.nationaalarchief.nl/mdto" targetNamespace="https://www.nationaalarchief.nl/mdto" elementFormDefault="qualified" attributeFormDefault="unqualified" version="v1.0.2">
 	<xsd:element name="MDTO" type="mdtoType"/>
 	<xsd:complexType name="mdtoType">
 		<xsd:choice>
@@ -11,7 +10,7 @@
 			</xsd:element>
 			<xsd:element name="bestand" type="bestandType">
 				<xsd:annotation>
-					<xsd:documentation>Een geordende verzameling van gegevens in elektronische vorm, die door een elektronisch apparaat onder één naam kan worden behandeld en aangesproken. </xsd:documentation>
+					<xsd:documentation>Een geordende verzameling van gegevens in elektronische vorm, die door een elektronisch apparaat onder één naam kan worden behandeld en aangesproken.</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
 		</xsd:choice>
@@ -23,7 +22,7 @@
 					<xsd:documentation>Gegevens waarmee  het object geïdentificeerd kan worden.</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
-			<xsd:element name="naam" type="xsd:string" minOccurs="1" maxOccurs="1">
+			<xsd:element name="naam" type="NietLegeWaarde" minOccurs="1" maxOccurs="1">
 				<xsd:annotation>
 					<xsd:documentation>Een betekenisvolle aanduiding waaronder het object bekend is.</xsd:documentation>
 				</xsd:annotation>
@@ -54,14 +53,14 @@
 							<xsd:documentation>Omschrijving van de inhoud van het informatieobject.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
-					<xsd:element name="raadpleeglocatie" type="raadpleeglocatieGegevens" minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="raadpleeglocatie" type="raadpleeglocatieGegevens" minOccurs="0" maxOccurs="1">
 						<xsd:annotation>
 							<xsd:documentation>Actuele verwijzing naar de locatie waar het informatieobject ter inzage ligt.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
 					<xsd:element name="dekkingInTijd" type="dekkingInTijdGegevens" minOccurs="0" maxOccurs="unbounded">
 						<xsd:annotation>
-							<xsd:documentation>Een tijdstip of de periode waarop de inhoud van het informatieobject betrekking heeft. </xsd:documentation>
+							<xsd:documentation>Een tijdstip of de periode waarop de inhoud van het informatieobject betrekking heeft.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
 					<xsd:element name="dekkingInRuimte" type="verwijzingGegevens" minOccurs="0" maxOccurs="unbounded">
@@ -96,7 +95,7 @@
 					</xsd:element>
 					<xsd:element name="isOnderdeelVan" type="verwijzingGegevens" minOccurs="0" maxOccurs="unbounded">
 						<xsd:annotation>
-							<xsd:documentation>De direct bovenliggende aggregatie waar dit informatieobject onderdeel van is. </xsd:documentation>
+							<xsd:documentation>De direct bovenliggende aggregatie waar dit informatieobject onderdeel van is.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
 					<xsd:element name="bevatOnderdeel" type="verwijzingGegevens" minOccurs="0" maxOccurs="unbounded">
@@ -131,7 +130,7 @@
 					</xsd:element>
 					<xsd:element name="activiteit" type="verwijzingGegevens" minOccurs="0" maxOccurs="1">
 						<xsd:annotation>
-							<xsd:documentation>De bedrijfsactiviteit waarbij het informatieobject door de archiefvormer is ontvangen of gemaakt. </xsd:documentation>
+							<xsd:documentation>De bedrijfsactiviteit waarbij het informatieobject door de archiefvormer is ontvangen of gemaakt.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
 					<xsd:element name="beperkingGebruik" type="beperkingGebruikGegevens" minOccurs="1" maxOccurs="unbounded">
@@ -147,7 +146,7 @@
 		<xsd:complexContent>
 			<xsd:extension base="objectType">
 				<xsd:sequence>
-					<xsd:element name="omvang" type="xsd:integer" minOccurs="1" maxOccurs="1">
+					<xsd:element name="omvang" type="xsd:nonNegativeInteger" minOccurs="1" maxOccurs="1">
 						<xsd:annotation>
 							<xsd:documentation>Aantal bytes in het bestand.</xsd:documentation>
 						</xsd:annotation>
@@ -159,7 +158,7 @@
 					</xsd:element>
 					<xsd:element name="checksum" type="checksumGegevens" minOccurs="1" maxOccurs="unbounded">
 						<xsd:annotation>
-							<xsd:documentation>Gegevens om te bepalen of het bestand beschadigd of gewijzigd is. </xsd:documentation>
+							<xsd:documentation>Gegevens om te bepalen of het bestand beschadigd of gewijzigd is.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
 					<xsd:element name="URLBestand" type="xsd:anyURI" minOccurs="0" maxOccurs="1">
@@ -178,12 +177,12 @@
 	</xsd:complexType>
 	<xsd:complexType name="identificatieGegevens">
 		<xsd:sequence>
-			<xsd:element name="identificatieKenmerk" type="xsd:string" minOccurs="1" maxOccurs="1">
+			<xsd:element name="identificatieKenmerk" type="NietLegeWaarde" minOccurs="1" maxOccurs="1">
 				<xsd:annotation>
 					<xsd:documentation>Een kenmerk waarmee een object geïdentificeerd kan worden.</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
-			<xsd:element name="identificatieBron" type="xsd:string" minOccurs="1" maxOccurs="1">
+			<xsd:element name="identificatieBron" type="NietLegeWaarde" minOccurs="1" maxOccurs="1">
 				<xsd:annotation>
 					<xsd:documentation>Herkomst van het kenmerk.</xsd:documentation>
 				</xsd:annotation>
@@ -192,7 +191,7 @@
 	</xsd:complexType>
 	<xsd:complexType name="verwijzingGegevens">
 		<xsd:sequence>
-			<xsd:element name="verwijzingNaam" type="xsd:string" minOccurs="1" maxOccurs="1">
+			<xsd:element name="verwijzingNaam" type="NietLegeWaarde" minOccurs="1" maxOccurs="1">
 				<xsd:annotation>
 					<xsd:documentation>De naam van het object waarnaar verwezen wordt.</xsd:documentation>
 				</xsd:annotation>
@@ -206,7 +205,7 @@
 	</xsd:complexType>
 	<xsd:complexType name="begripGegevens">
 		<xsd:sequence>
-			<xsd:element name="begripLabel" type="xsd:string" minOccurs="1" maxOccurs="1">
+			<xsd:element name="begripLabel" type="NietLegeWaarde" minOccurs="1" maxOccurs="1">
 				<xsd:annotation>
 					<xsd:documentation>De tekstweergave van het begrip dat is toegekend in de begrippenlijst.</xsd:documentation>
 				</xsd:annotation>
@@ -227,7 +226,7 @@
 		<xsd:sequence>
 			<xsd:element name="dekkingInTijdType" type="begripGegevens" minOccurs="1" maxOccurs="1">
 				<xsd:annotation>
-					<xsd:documentation>Nadere typering van het tijdstip of de periode waar de inhoud van het informatieobject betrekking op heeft. </xsd:documentation>
+					<xsd:documentation>Nadere typering van het tijdstip of de periode waar de inhoud van het informatieobject betrekking op heeft.</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
 			<xsd:element name="dekkingInTijdBegindatum" minOccurs="1" maxOccurs="1">
@@ -358,12 +357,12 @@
 		<xsd:sequence>
 			<xsd:element name="checksumAlgoritme" type="begripGegevens" minOccurs="1" maxOccurs="1">
 				<xsd:annotation>
-					<xsd:documentation>Naam van het checksum algoritme dat is gebruikt om de checksum te maken. </xsd:documentation>
+					<xsd:documentation>Naam van het checksum algoritme dat is gebruikt om de checksum te maken.</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
-			<xsd:element name="checksumWaarde" type="xsd:string" minOccurs="1" maxOccurs="1">
+			<xsd:element name="checksumWaarde" type="NietLegeWaarde" minOccurs="1" maxOccurs="1">
 				<xsd:annotation>
-					<xsd:documentation>De waarde van de checksum. </xsd:documentation>
+					<xsd:documentation>De waarde van de checksum.</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
 			<xsd:element name="checksumDatum" type="xsd:dateTime" minOccurs="1" maxOccurs="1">
@@ -375,16 +374,27 @@
 	</xsd:complexType>
 	<xsd:complexType name="raadpleeglocatieGegevens">
 		<xsd:sequence>
-			<xsd:element name="raadpleeglocatieFysiek" type="verwijzingGegevens" minOccurs="0" maxOccurs="unbounded">
-				<xsd:annotation>
-					<xsd:documentation>Actuele fysieke locatie waar het informatieobject ter inzage ligt.</xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
-			<xsd:element name="raadpleeglocatieOnline" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded">
-				<xsd:annotation>
-					<xsd:documentation>Actuele verwijzing naar een online raadpleeglocatie die het informatieobject en de bijbehorende metagegevens weergeeft. </xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="raadpleeglocatieFysiek" type="verwijzingGegevens" minOccurs="1" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>Actuele fysieke locatie waar het informatieobject ter inzage ligt.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="raadpleeglocatieOnline" type="xsd:anyURI" minOccurs="1" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>Actuele verwijzing naar een online raadpleeglocatie die het informatieobject en de bijbehorende metagegevens weergeeft.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
 		</xsd:sequence>
 	</xsd:complexType>
+	<xsd:simpleType name="NietLegeWaarde">
+		<xsd:annotation>
+			<xsd:documentation>Tekst mag spaties bevatten, maar moet minstens één niet-witruimtekarakter bevatten. Lege waarden of enkel witruimte zijn niet toegestaan.</xsd:documentation>
+		</xsd:annotation>			
+    	<xsd:restriction base="xsd:string">
+        	<xsd:minLength value="1"/>
+			<xsd:pattern value="(\s*[^\s]\s*)+"/>
+    	</xsd:restriction>
+	</xsd:simpleType>
 </xsd:schema>
