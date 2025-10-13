@@ -44,7 +44,7 @@ Gebruikers wordt aangeraden in hun implementaties en documentatie altijd de gebr
 
 ---
 
-## 📜 Wijzigingen en validatie-updates
+## 📜 MDTO-XSD1.0.2. - Wijzigingen en validatie-updates 
 
 ### Validatie van verplichte elementen op lege waarden
 
