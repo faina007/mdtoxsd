@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MDTO XSD Documentatie — v1.0.2</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--muted:#6b7280;--accent:#0f172a}
+    body{font-family:Inter, Roboto, Arial, sans-serif;background:var(--bg);color:var(--accent);margin:0}
+    header{background:linear-gradient(90deg,#0ea5a9, #3b82f6);color:#fff;padding:28px 32px}
+    header h1{margin:0;font-size:1.25rem}
+    header p{margin:.25rem 0 0;font-size:.9rem;opacity:.95}
+    .wrap{display:grid;grid-template-columns:300px 1fr;gap:20px;padding:24px;max-width:1200px;margin:18px auto}
+    nav{position:sticky;top:20px}
+    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    nav ul{list-style:none;padding:0;margin:0}
+    nav li{margin:6px 0}
+    nav a{color:#0f172a;text-decoration:none;font-weight:600;font-size:.95rem}
+    nav a.small{font-weight:400;color:var(--muted);display:block;font-size:.85rem}
+    main{min-height:60vh}
+    h2{margin-top:0}
+    section{margin-bottom:20px}
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    th,td{border:1px solid #eef2f7;padding:8px;text-align:left;font-size:.93rem}
+    th{background:#fbfdff;font-weight:700}
+    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;background:#f3f6f9;padding:8px;border-radius:6px;display:block}
+    details{margin-top:8px}
+    .prop{font-size:.95rem}
+    .muted{color:var(--muted)}
+    footer{max-width:1200px;margin:0 auto;padding:12px 24px;color:var(--muted);font-size:.9rem}
+    @media (max-width:880px){.wrap{grid-template-columns:1fr;margin:12px}.nav{position:static}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MDTO XSD — Documentatie (versie v1.0.2)</h1>
+    <p>Samenvattende HTML-documentatie van het XSD-schema dat de MDTO-metagegevens beschrijft. Elementen, typen, cardinaliteit en toelichtingen zijn opgenomen.</p>
+  </header>
+
+  <div class="wrap">
+    <nav class="card">
+      <strong>Inhoud</strong>
+      <ul>
+        <li><a href="#overview">Overzicht</a></li>
+        <li><a href="#root">Root element &amp; namespace</a></li>
+        <li><a href="#elements">Top-level elementen</a></li>
+        <li><a href="#types">Complex types</a></li>
+        <li><a href="#simpletypes">Simple types</a></li>
+        <li><a href="#notes">Opmerkingen &amp; validatieregels</a></li>
+      </ul>
+      <hr/>
+      <div class="muted" style="margin-top:8px">Snel naar type:</div>
+      <ul>
+        <li><a class="small" href="#mdtoType">mdtoType</a></li>
+        <li><a class="small" href="#objectType">objectType</a></li>
+        <li><a class="small" href="#informatieobjectType">informatieobjectType</a></li>
+        <li><a class="small" href="#bestandType">bestandType</a></li>
+        <li><a class="small" href="#identificatieGegevens">identificatieGegevens</a></li>
+        <li><a class="small" href="#verwijzingGegevens">verwijzingGegevens</a></li>
+        <li><a class="small" href="#begripGegevens">begripGegevens</a></li>
+        <li><a class="small" href="#eventGegevens">eventGegevens</a></li>
+        <li><a class="small" href="#NietLegeString">NietLegeString</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section id="overview" class="card">
+        <h2>Overzicht</h2>
+        <p class="muted">Namespace: <span class="mono">https://www.nationaalarchief.nl/mdto</span> — Schema versie: <strong>v1.0.2</strong></p>
+        <p>Dit schema beschrijft twee top-level entiteiten: <code>informatieobject</code> en <code>bestand</code>. Beide zijn onderdeel van de wrapper-element <code>MDTO</code> (type <code>mdtoType</code>).</p>
+      </section>
+
+      <section id="root" class="card">
+        <h2>Root element &amp; targetNamespace</h2>
+        <table>
+          <tr><th>Attribuut</th><th>Waarde</th></tr>
+          <tr><td>targetNamespace</td><td>https://www.nationaalarchief.nl/mdto</td></tr>
+          <tr><td>elementFormDefault</td><td>qualified</td></tr>
+          <tr><td>attributeFormDefault</td><td>unqualified</td></tr>
+          <tr><td>version</td><td>v1.0.2</td></tr>
+        </table>
+      </section>
+
+      <section id="elements" class="card">
+        <h2>Top-level elementen</h2>
+        <h3 id="MDTO">MDTO</h3>
+        <p class="muted">Element <code>MDTO</code> (type: <code>mdtoType</code>) — omsluiter voor één of meer <code>informatieobject</code> of <code>bestand</code> elementen.</p>
+
+        <h3 id="informatieobject">informatieobject (element)</h3>
+        <p class="muted">Type: <code>informatieobjectType</code> — Beschrijving: Een op zichzelf staand geheel van gegevens met een eigen identiteit. (bron: DUTO-eisen)</p>
+
+        <h3 id="bestand">bestand (element)</h3>
+        <p class="muted">Type: <code>bestandType</code> — Beschrijving: Een geordende verzameling van gegevens in elektronische vorm, die door een elektronisch apparaat onder één naam kan worden behandeld en aangesproken.</p>
+      </section>
+
+      <section id="types" class="card">
+        <h2>Complex types (selectie)</h2>
+
+        <article id="mdtoType">
+          <h3>mdtoType</h3>
+          <p class="muted">Structuur: keuze (choice) tussen <code>informatieobject</code> en <code>bestand</code>.</p>
+          <details>
+            <summary>XML-structuur (kort)</summary>
+            <pre class="mono">&lt;choice&gt;
+  &lt;element name="informatieobject" type="informatieobjectType" /&gt;
+  &lt;element name="bestand" type="bestandType" /&gt;
+&lt;/choice&gt;</pre>
+          </details>
+        </article>
+
+        <article id="objectType">
+          <h3>objectType</h3>
+          <p class="muted">Basistype voor objecten die identificatie en naam vereisen.</p>
+          <table>
+            <tr><th>Child element</th><th>Type</th><th>minOccurs</th><th>maxOccurs</th><th>Omschrijving</th></tr>
+            <tr><td>identificatie</td><td>identificatieGegevens</td><td>1</td><td>unbounded</td><td>Gegevens waarmee het object geïdentificeerd kan worden.</td></tr>
+            <tr><td>naam</td><td>NietLegeString</td><td>1</td><td>1</td><td>Een betekenisvolle aanduiding waaronder het object bekend is.</td></tr>
+          </table>
+        </article>
+
+        <article id="informatieobjectType">
+          <h3>informatieobjectType (extends objectType)</h3>
+          <p class="muted">Breidt <code>objectType</code> uit met veel domeinspecifieke velden over metadata, relaties, bewaartermijnen en gebruiksbeperkingen.</p>
+
+          <table>
+            <tr><th>Element</th><th>Type</th><th>min</th><th>max</th><th>Toelichting</th></tr>
+            <tr><td>aggregatieniveau</td><td>begripGegevens</td><td>0</td><td>1</td><td>Het aggregatieniveau van het informatieobject.</td></tr>
+            <tr><td>classificatie</td><td>begripGegevens</td><td>0</td><td>unbounded</td><td>Ordening in een classificatieschema.</td></tr>
+            <tr><td>trefwoord</td><td>xsd:string</td><td>0</td><td>unbounded</td><td>Trefwoord dat aan het informatieobject is toegekend.</td></tr>
+            <tr><td>omschrijving</td><td>xsd:string</td><td>0</td><td>unbounded</td><td>Omschrijving van de inhoud.</td></tr>
+            <tr><td>raadpleeglocatie</td><td>raadpleeglocatieGegevens</td><td>0</td><td>unbounded</td><td>Verwijzing naar locatie waar object ter inzage ligt.</td></tr>
+            <tr><td>dekkingInTijd</td><td>dekkingInTijdGegevens</td><td>0</td><td>unbounded</td><td>Tijdstip of periode waarop inhoud betrekking heeft.</td></tr>
+            <tr><td>dekkingInRuimte</td><td>verwijzingGegevens</td><td>0</td><td>unbounded</td><td>Plaats of locatie waarop inhoud betrekking heeft.</td></tr>
+            <tr><td>taal</td><td>xsd:language</td><td>0</td><td>unbounded</td><td>De taal van het informatieobject.</td></tr>
+            <tr><td>event</td><td>eventGegevens</td><td>0</td><td>unbounded</td><td>Gebeurtenissen gerelateerd aan het object.</td></tr>
+            <tr><td>waardering</td><td>begripGegevens</td><td>1</td><td>1</td><td>Waardering volgens de selectielijst.</td></tr>
+            <tr><td>bewaartermijn</td><td>termijnGegevens</td><td>0</td><td>1</td><td>Termijn waarin het object bewaard dient te worden.</td></tr>
+            <tr><td>informatiecategorie</td><td>begripGegevens</td><td>0</td><td>1</td><td>Informatiecategorie waarop bewaartermijn is gebaseerd.</td></tr>
+            <tr><td>isOnderdeelVan</td><td>verwijzingGegevens</td><td>0</td><td>unbounded</td><td>De direct bovenliggende aggregatie.</td></tr>
+            <tr><td>bevatOnderdeel</td><td>verwijzingGegevens</td><td>0</td><td>unbounded</td><td>Onderliggende informatieobjecten (omgekeerde relatie).</td></tr>
+            <tr><td>heeftRepresentatie</td><td>verwijzingGegevens</td><td>0</td><td>unbounded</td><td>Verwijzing naar representerende bestanden.</td></tr>
+            <tr><td>aanvullendeMetagegevens</td><td>verwijzingGegevens</td><td>0</td><td>unbounded</td><td>Verwijzing naar domeinspecifieke metadata.</td></tr>
+            <tr><td>gerelateerdInformatieobject</td><td>gerelateerdInformatieobjectGegevens</td><td>0</td><td>unbounded</td><td>Relaties met andere informatieobjecten.</td></tr>
+            <tr><td>archiefvormer</td><td>verwijzingGegevens</td><td>1</td><td>unbounded</td><td>Organisatie verantwoordelijk voor het object.</td></tr>
+            <tr><td>betrokkene</td><td>betrokkeneGegevens</td><td>0</td><td>unbounded</td><td>Persoon of organisatie relevant bij ontstaan/gebruik.</td></tr>
+            <tr><td>activiteit</td><td>verwijzingGegevens</td><td>0</td><td>1</td><td>Bedrijfsactiviteit waarbij object is ontvangen of gemaakt.</td></tr>
+            <tr><td>beperkingGebruik</td><td>beperkingGebruikGegevens</td><td>1</td><td>unbounded</td><td>Beperkingen op het gebruik van het informatieobject.</td></tr>
+          </table>
+        </article>
+
+        <article id="bestandType">
+          <h3>bestandType (extends objectType)</h3>
+          <p class="muted">Specificeert technische metadata van bestanden.</p>
+          <table>
+            <tr><th>Element</th><th>Type</th><th>min</th><th>max</th><th>Toelichting</th></tr>
+            <tr><td>omvang</td><td>xsd:nonNegativeInteger</td><td>1</td><td>1</td><td>Aantal bytes in het bestand (niet-negatief).</td></tr>
+            <tr><td>bestandsformaat</td><td>begripGegevens</td><td>1</td><td>1</td><td>Manier waarop informatie binair gecodeerd is.</td></tr>
+            <tr><td>checksum</td><td>checksumGegevens</td><td>1</td><td>unbounded</td><td>Checksumgegevens om integriteit te controleren.</td></tr>
+            <tr><td>URLBestand</td><td>xsd:anyURI</td><td>0</td><td>1</td><td>Actuele verwijzing naar het bestand online.</td></tr>
+            <tr><td>isRepresentatieVan</td><td>verwijzingGegevens</td><td>1</td><td>1</td><td>Verwijzing naar het informatieobject waarvan het bestand representatie is.</td></tr>
+          </table>
+        </article>
+
+      </section>
+
+      <section id="otherTypes" class="card">
+        <h2>Overige complex types (kort)</h2>
+
+        <article id="identificatieGegevens">
+          <h3>identificatieGegevens</h3>
+          <p class="muted">Bevat identificatiekenmerk en bron.</p>
+          <table>
+            <tr><th>element</th><th>type</th><th>min</th><th>max</th></tr>
+            <tr><td>identificatieKenmerk</td><td>NietLegeString</td><td>1</td><td>1</td></tr>
+            <tr><td>identificatieBron</td><td>NietLegeString</td><td>1</td><td>1</td></tr>
+          </table>
+        </article>
+
+        <article id="verwijzingGegevens">
+          <h3>verwijzingGegevens</h3>
+          <p class="muted">Naam en optionele identificatie van het doelobject.</p>
+          <table>
+            <tr><th>element</th><th>type</th><th>min</th><th>max</th></tr>
+            <tr><td>verwijzingNaam</td><td>NietLegeString</td><td>1</td><td>1</td></tr>
+            <tr><td>verwijzingIdentificatie</td><td>identificatieGegevens</td><td>0</td><td>1</td></tr>
+          </table>
+        </article>
+
+        <article id="begripGegevens">
+          <h3>begripGegevens</h3>
+          <table>
+            <tr><th>element</th><th>type</th><th>min</th><th>max</th></tr>
+            <tr><td>begripLabel</td><td>NietLegeString</td><td>1</td><td>1</td></tr>
+            <tr><td>begripCode</td><td>xsd:string</td><td>0</td><td>1</td></tr>
+            <tr><td>begripBegrippenlijst</td><td>verwijzingGegevens</td><td>1</td><td>1</td></tr>
+          </table>
+        </article>
+
+        <article id="dekkingInTijdGegevens">
+          <h3>dekkingInTijdGegevens</h3>
+          <p class="muted">Bevat type en begin-/einddatum (gYear | gYearMonth | date).</p>
+        </article>
+
+        <article id="eventGegevens">
+          <h3>eventGegevens</h3>
+          <table>
+            <tr><th>element</th><th>type</th><th>min</th><th>max</th></tr>
+            <tr><td>eventType</td><td>begripGegevens</td><td>1</td><td>1</td></tr>
+            <tr><td>eventTijd</td><td>gYear|gYearMonth|date|dateTime</td><td>0</td><td>1</td></tr>
+            <tr><td>eventVerantwoordelijkeActor</td><td>verwijzingGegevens</td><td>0</td><td>1</td></tr>
+            <tr><td>eventResultaat</td><td>xsd:string</td><td>0</td><td>1</td></tr>
+          </table>
+        </article>
+
+        <article id="gerelateerdInformatieobjectGegevens">
+          <h3>gerelateerdInformatieobjectGegevens</h3>
+          <table>
+            <tr><th>element</th><th>type</th></tr>
+            <tr><td>gerelateerdInformatieobjectVerwijzing</td><td>verwijzingGegevens (1..1)</td></tr>
+            <tr><td>gerelateerdInformatieobjectTypeRelatie</td><td>begripGegevens (1..1)</td></tr>
+          </table>
+        </article>
+
+        <article id="betrokkeneGegevens">
+          <h3>betrokkeneGegevens</h3>
+          <table>
+            <tr><th>element</th><th>type</th></tr>
+            <tr><td>betrokkeneTypeRelatie</td><td>begripGegevens (1..1)</td></tr>
+            <tr><td>betrokkeneActor</td><td>verwijzingGegevens (1..1)</td></tr>
+          </table>
+        </article>
+
+        <article id="beperkingGebruikGegevens">
+          <h3>beperkingGebruikGegevens</h3>
+          <table>
+            <tr><th>element</th><th>type</th><th>min</th><th>max</th></tr>
+            <tr><td>beperkingGebruikType</td><td>begripGegevens</td><td>1</td><td>1</td></tr>
+            <tr><td>beperkingGebruikNadereBeschrijving</td><td>xsd:string</td><td>0</td><td>1</td></tr>
+            <tr><td>beperkingGebruikDocumentatie</td><td>verwijzingGegevens</td><td>0</td><td>unbounded</td></tr>
+            <tr><td>beperkingGebruikTermijn</td><td>termijnGegevens</td><td>0</td><td>1</td></tr>
+          </table>
+        </article>
+
+        <article id="termijnGegevens">
+          <h3>termijnGegevens</h3>
+          <p class="muted">Bevat trigger, startdatum, looptijd (duration) en optionele einddatum (gYear|gYearMonth|date).</p>
+        </article>
+
+        <article id="checksumGegevens">
+          <h3>checksumGegevens</h3>
+          <table>
+            <tr><th>element</th><th>type</th></tr>
+            <tr><td>checksumAlgoritme</td><td>begripGegevens (1..1)</td></tr>
+            <tr><td>checksumWaarde</td><td>NietLegeString (1..1)</td></tr>
+            <tr><td>checksumDatum</td><td>xsd:dateTime (1..1)</td></tr>
+          </table>
+        </article>
+
+        <article id="raadpleeglocatieGegevens">
+          <h3>raadpleeglocatieGegevens</h3>
+          <p class="muted">Fysieke en online locaties waar een object raadpleegbaar is.</p>
+        </article>
+
+      </section>
+
+      <section id="simpletypes" class="card">
+        <h2>Simple types</h2>
+
+        <article id="NietLegeString">
+          <h3>NietLegeString</h3>
+          <p class="muted">Gedefinieerd als een string met minimaal 1 karakter en niet uitsluitend uit witruimte bestaande. Dit voorkomt dat lege strings worden gebruikt waar een verplicht veld aanwezig moet zijn.</p>
+          <pre class="mono">&lt;simpleType name="NietLegeString"&gt;
+  &lt;restriction base="xsd:string"&gt;
+    &lt;minLength value="1"/&gt;
+    &lt;pattern value="(\s*[^\s]\s*)+"/&gt;
+  &lt;/restriction&gt;
+&lt;/simpleType&gt;</pre>
+        </article>
+
+        <article>
+          <h3>Andere relevante XSD built-ins</h3>
+          <ul class="muted">
+            <li><code>xsd:nonNegativeInteger</code> gebruikt voor bestandsomvang (geen negatieve waarden toegestaan)</li>
+            <li><code>xsd:date</code>, <code>xsd:dateTime</code>, <code>xsd:gYear</code>, <code>xsd:gYearMonth</code> gebruikt voor tijdsaanduidingen</li>
+            <li><code>xsd:anyURI</code> voor URL's</li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="notes" class="card">
+        <h2>Opmerkingen &amp; validatieregels</h2>
+        <ul>
+          <li>Velden waarvan <code>minOccurs="1"</code> zijn verplicht — let daarbij op dat sommige velden het custom type <code>NietLegeString</code> gebruiken; die mogen niet leeg of alleen witruimte zijn.</li>
+          <li>Cardinaliteit met <code>maxOccurs="unbounded"</code> betekent dat meerdere waarden toegestaan zijn.</li>
+          <li>De wijziging ten opzichte van eerdere versies vermeldt expliciet dat <code>archiefvormer</code> nu <code>maxOccurs="unbounded"</code> heeft en dat <code>beperkingGebruik</code> minimaal één keer aanwezig moet zijn (<code>minOccurs="1"</code>).</li>
+          <li>Voor <code>omvang</code> wordt <code>xsd:nonNegativeInteger</code> gebruikt — negatieve bestandsomvang is daardoor uitgesloten.</li>
+          <li>Wanneer u instance-documents bouwt: respecteer namespaces en gebruik <code>elementFormDefault="qualified"</code> om elementen in de target namespace te plaatsen.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Voorbeelden</h2>
+        <p class="muted">Kort voorbeeld van een <code>bestand</code>-element (vereenvoudigd):</p>
+        <pre class="mono">&lt;MDTO xmlns="https://www.nationaalarchief.nl/mdto" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;bestand&gt;
+    &lt;identificatie&gt;
+      &lt;identificatieKenmerk&gt;file-12345&lt;/identificatieKenmerk&gt;
+      &lt;identificatieBron&gt;ingangsysteem&lt;/identificatieBron&gt;
+    &lt;/identificatie&gt;
+    &lt;naam&gt;jaarverslag.pdf&lt;/naam&gt;
+    &lt;omvang&gt;345678&lt;/omvang&gt;
+    &lt;bestandsformaat&gt;
+      &lt;begripLabel&gt;PDF/A-1b&lt;/begripLabel&gt;
+      &lt;begripBegrippenlijst&gt;&lt;verwijzingNaam&gt;MIME-types&lt;/verwijzingNaam&gt;&lt;/begripBegrippenlijst&gt;
+    &lt;/bestandsformaat&gt;
+    &lt;checksum&gt;
+      &lt;checksumAlgoritme&gt;&lt;begripLabel&gt;SHA-256&lt;/begripLabel&gt;&lt;/checksumAlgoritme&gt;
+      &lt;checksumWaarde&gt;...hash...&lt;/checksumWaarde&gt;
+      &lt;checksumDatum&gt;2024-10-01T12:34:56&lt;/checksumDatum&gt;
+    &lt;/checksum&gt;
+    &lt;isRepresentatieVan&gt;
+      &lt;verwijzingNaam&gt;Informatieobject-5678&lt;/verwijzingNaam&gt;
+    &lt;/isRepresentatieVan&gt;
+  &lt;/bestand&gt;
+&lt;/MDTO&gt;</pre>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    &copy; Nationaal Archief — Gegenereerd: HTML-documentatie op basis van MDTO XSD (v1.0.2).
+  </footer>
+</body>
+</html>
