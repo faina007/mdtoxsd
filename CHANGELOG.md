@@ -14,10 +14,7 @@ De validatie is uitgebreid zodat nu ook wordt gecontroleerd dat een verplichte t
 
 ### Herhaalbaarheid van `<raadpleeglocatie>`, `<raadpleeglocatieFysiek>` en `<raadpleeglocatieOnline>`
 
-Binnen het element `<Informatieobject>` mag het element `<raadpleeglocatie>` **maximaal één keer** voorkomen.  
-Binnen dit element kunnen zowel `<raadpleeglocatieFysiek>` als `<raadpleeglocatieOnline>` **meerdere keren** worden opgenomen.  
-
-De **volgorde** waarin deze elementen voorkomen is vrij en heeft **geen betekenis** voor de interpretatie van de gegevens.
+Waar eerder meerdere subelementen zoals `<raadpleeglocatieFysiek>` en `<raadpleeglocatieOnline>` binnen één `<raadpleeglocatie>` mochten voorkomen, moet nu voor elke fysieke of online locatie een aparte raadpleeglocatie worden opgegeven.
 
 ---
 
